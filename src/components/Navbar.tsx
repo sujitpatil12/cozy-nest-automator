@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Button from './ui/Button';
+import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,10 +22,10 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'Features', href: '#features' },
-    { name: 'Products', href: '#products' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'Features', href: '/features' },
+    { name: 'Dashboard', href: '/dashboard' },
+    { name: 'Contact', href: '/#contact' },
   ];
 
   return (
@@ -32,21 +33,21 @@ const Navbar: React.FC = () => {
       isScrolled ? 'py-3 bg-white/90 backdrop-blur-md shadow-sm' : 'py-5 bg-transparent'
     }`}>
       <div className="container-tight flex justify-between items-center">
-        <a href="#" className="flex items-center">
+        <Link to="/" className="flex items-center">
           <span className="text-2xl font-bold text-smart-black">Smart<span className="text-smart-blue">Home</span></span>
-        </a>
+        </Link>
         
         {/* Desktop navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <div className="flex space-x-6">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 className="text-smart-dark-gray hover:text-smart-blue transition-colors"
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
           <Button>Get Started</Button>
@@ -66,14 +67,14 @@ const Navbar: React.FC = () => {
         <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg animate-fade-in">
           <div className="container py-4 flex flex-col space-y-4">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 className="px-4 py-2 text-smart-dark-gray hover:bg-smart-gray rounded-md"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
             <div className="px-4 pt-2">
               <Button className="w-full">Get Started</Button>
