@@ -7,13 +7,17 @@ interface SectionHeadingProps {
   subtitle?: string;
   centered?: boolean;
   className?: string;
+  titleClassName?: string;
+  subtitleClassName?: string;
 }
 
 const SectionHeading: React.FC<SectionHeadingProps> = ({ 
   title, 
   subtitle, 
   centered = true,
-  className 
+  className,
+  titleClassName,
+  subtitleClassName
 }) => {
   return (
     <div className={cn(
@@ -22,13 +26,19 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
       className
     )}>
       <div className="inline-block">
-        <h2 className="text-3xl md:text-4xl font-bold text-smart-black mb-3">
+        <h2 className={cn(
+          "text-3xl md:text-4xl font-bold text-smart-black mb-3",
+          titleClassName
+        )}>
           {title}
         </h2>
         <div className="h-1 w-12 bg-smart-blue rounded-full mx-auto my-4"></div>
       </div>
       {subtitle && (
-        <p className="text-lg text-smart-dark-gray max-w-2xl mx-auto mt-4 text-balance">
+        <p className={cn(
+          "text-lg text-smart-dark-gray max-w-2xl mx-auto mt-4 text-balance",
+          subtitleClassName
+        )}>
           {subtitle}
         </p>
       )}
