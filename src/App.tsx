@@ -1,32 +1,36 @@
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import FeaturesPage from "./pages/Features";
-import DashboardPage from "./pages/Dashboard";
+import Features from "./pages/Features";
+import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import { Toaster } from "./components/ui/toaster";
 
-const queryClient = new QueryClient();
+// Blockchain Voting System pages
+import Home from "./pages/Home";
+import Vote from "./pages/Vote";
+import Results from "./pages/Results";
+import Admin from "./pages/Admin";
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/vote" element={<Vote />} />
+        <Route path="/vote/:electionId" element={<Vote />} />
+        <Route path="/results" element={<Results />} />
+        <Route path="/admin" element={<Admin />} />
+        
+        {/* Legacy routes */}
+        <Route path="/index" element={<Index />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
       <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/features" element={<FeaturesPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+    </Router>
+  );
+}
 
 export default App;
